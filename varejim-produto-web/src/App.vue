@@ -1,14 +1,26 @@
 <template>
   <div id="app">
     <Header />
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-import Header from '@/components/Header'
+import Header from "@/components/Header";
 export default {
-  components:{Header}
-}
+  components: { Header },
+   created() {
+    try{
+
+      console.log('c1')
+      
+      this.$store.dispatch('recuperarProdutosApi')
+     console.log('c2')
+    }
+    catch(err){
+      console.log('fds')
+    }
+  },
+};
 </script>
 <style lang="scss">
 #app {
@@ -18,5 +30,5 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>
+ 

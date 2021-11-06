@@ -1,0 +1,61 @@
+#Paginacao {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    #iconesSetas {
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      align-items: center;
+      margin: 8px;
+  
+      img {
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+      }
+  
+      #numeroPaginas {
+        div {
+          padding: 4px;
+          width: 24px;
+          // height: 20px;
+          display: flex;
+          justify-content: center;
+          flex-direction: row;
+          margin-right: 2px;
+          margin-left: 2px;
+          border-radius: 100%;
+        }
+        div:hover {
+          cursor: pointer;
+          background-color: rgb(255, 255, 255);
+          color: $primary;
+        }
+        .paginaSelecionada {
+          background-color: rgb(255, 255, 255);
+          color: $primary;
+        }
+      }
+    }
+  
+    #inputSpan {
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+      .select {
+        margin-left: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 20px;
+        width: 40px;
+      }
+  
+      .select:focus {
+        outline: none !important;
+        border-color: #c4c4c4;
+      }
+    }
+  }
+  

@@ -40,9 +40,10 @@ const client = {
     });
   },
   delete: async (url, params) => {
+    console.log(url+"/:"+params)
     return new Promise((resolve, reject) => {
       http
-        .delete(url, { params: params })
+        .delete(url+"/:"+params)
         .then((suc) => {
           resolve(suc.data);
         })
