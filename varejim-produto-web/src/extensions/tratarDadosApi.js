@@ -9,7 +9,6 @@ const tratar = {
     return tratado;
   },
   transformarIdDescParaValueText(naoTratado){
-      console.log('op1',naoTratado)
      const naoTratadoCopy = clone(naoTratado)
       return{value:naoTratadoCopy.secao_id,text:naoTratadoCopy.descricao}
   }

@@ -32,7 +32,6 @@ export default new Vuex.Store({
   
         
         const produtos = clone(state.produtos);
-       console.log("p",produtos)
         const produtosFiltrados = produtos.items.filter((el) => {
           if (
             el.descricao
@@ -53,10 +52,8 @@ export default new Vuex.Store({
       
     },
     recuperarProduto: (state) => (id) => {
-      console.log(state.produtos.items);
-      console.log(id)
+     
       const pos  = state.produtos.items.findIndex(el =>{return el.id==id})
-      console.log(pos)
       return state.produtos.items[pos];
       // return state.produtos
     },

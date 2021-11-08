@@ -7,7 +7,10 @@ import services from "@/services";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-
+import Vuelidate from 'vuelidate'
+import validacaoMixin from '@/mixins/validacao.js'
+Vue.mixin(validacaoMixin);
+Vue.use(Vuelidate)
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 const plugin = {

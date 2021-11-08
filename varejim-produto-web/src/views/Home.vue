@@ -49,6 +49,7 @@
 
 export default {
   async mounted() {
+    console.log('c3')
     if (this.$store.getters.filtro) {
       this.filtro = this.$store.getters.filtro;
       this.buscarProdutos(this.filtro);
@@ -57,6 +58,7 @@ export default {
         this.buscarProdutos("");
       }
     }
+    console.log('c4')
   },
   methods: {
     goToDetail(id) {

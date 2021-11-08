@@ -6,5 +6,8 @@ const produtos = {
   apagarProduto: (id) => {
     return client.delete("/produtos",  id );
   },
+  alterarProduto(id,params){
+    return client.put("/produtos/"+id , params)
+  }
 };
 export default produtos;
