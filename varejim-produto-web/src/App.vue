@@ -8,17 +8,10 @@
 import Header from "@/components/Header";
 export default {
   components: { Header },
-   created() {
-    try{
-
-      console.log('c1')
-      
-      this.$store.dispatch('recuperarProdutosApi')
-     console.log('c2')
-    }
-    catch(err){
-      console.log('fds')
-    }
+  created() {
+    try {
+      this.$store.dispatch("recuperarProdutosApi");
+    } catch (err) {}
   },
 };
 </script>
@@ -31,4 +24,3 @@ export default {
   color: #2c3e50;
 }
 </style>
- 

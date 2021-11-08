@@ -1,23 +1,29 @@
 <template>
   <div id="detail">
     <b-container>
-      <b-row>
-        <h1 class="mb-4" v-if="produto">{{ produto.descricao }}</h1>
-        
+      <b-row class="my-2">
+        <div class="center">
+          <span class="mx-2" v-if="produto">{{ produto.descricao }}</span>
+
+          <b-button
+            class="mx-1"
+            @click="apagarProduto(produto)"
+            variant="danger"
+          >
+            Apagar</b-button
+          >
+        </div>
       </b-row>
       <b-row>
-        <b-col cols="12">
-          <b-form>
-            <b-col cols="12" md="5">
-              <b-input placeholder="Descrição" maxlength="120" />
-            </b-col>
-            <!-- <b-col cols="12" md="6"> -->
-            <b-form-select
-              v-model="selecionado"
-              :options="options"
-            ></b-form-select>
-            <!-- </b-col> -->
-          </b-form>
+        <b-col md="5" cols="12">
+          <b-input placeholder="Descrição" maxlength="120" />
+        </b-col>
+        <b-col md="4" cols="12">
+          <b-form-select
+            v-model="selecionado"
+            :options="opcoes"
+            class="form-select"
+          ></b-form-select>
         </b-col>
       </b-row>
     </b-container>
@@ -25,29 +31,30 @@
 </template>
 <script>
 export default {
+  async mounted() {
+    this.opcoes.push({ value: null, text: 'Selecione uma categoria',disabled:true },)
+    this.opcoes.push(... await this.$services.secoes.recuperarDadosSelectSecoes());
+  },
   data() {
     return {
-      options: [
-        { value: null, text: "Please select an option" },
-        { value: "a", text: "This is First option" },
-        { value: "b", text: "Selected Option" },
-        { value: { C: "3PO" }, text: "This is an option with object value" },
-        { value: "d", text: "This one is disabled", disabled: true },
-      ],
+      opcoes: [],
       selecionado: null,
     };
   },
   computed: {
     produto() {
-      if (this.$store.getters.produtos.items.length>0) {
-        
+      if (this.$store.getters.produtos.items.length > 0) {
         return this.$services.produtos.recuperarProduto(
           this.$route.params.idProduto
         );
-      }
-      
+      } else return false;
     },
   },
- 
 };
 </script>
+<style lang="scss" scoped>
+.center {
+  display: flex;
+  justify-content: center;
+}
+</style>

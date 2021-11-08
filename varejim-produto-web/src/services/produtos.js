@@ -1,12 +1,19 @@
 import store from "../store";
+import repository from "../repository";
 const produtos = {
   filtrarProdutos:  (filtro) => {
     return store.getters.filtrarProdutos(filtro);
   },
-  apagarProduto: (id) => {
-    return this.$repository.produtos.apagarProduto(id);
+  apagarProduto: async (id) => {
+    try{
+      await repository.produtos.apagarProduto(id);
+      alert("Produto " + produto.id + " apagado com sucesso.");
+    }
+    catch (err){
+      alert("Erro ao apagar produto")
+    }
   },
-  asyncRecuperarProdutosApi: async() => {
+  RecuperarProdutosApi: async() => {
     return await store.dispatch("recuperarProdutosApi");
   },
   recuperarProduto: (id) => {

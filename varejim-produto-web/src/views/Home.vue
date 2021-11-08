@@ -6,11 +6,7 @@
       </b-row>
       <b-row>
         <b-col cols="12">
-          <b-form-input
-            placeholder="Pesquisa"
-            v-model="filtro"
-            class="my-3"
-          />
+          <b-form-input placeholder="Pesquisa" v-model="filtro" class="my-3" />
         </b-col>
       </b-row>
       <b-row>
@@ -53,17 +49,18 @@
 
 export default {
   async mounted() {
-    console.log("c3");
-    // await this.buscarProdutos(this.filtro);
     if (this.$store.getters.filtro) {
       this.filtro = this.$store.getters.filtro;
       this.buscarProdutos(this.filtro);
+    } else {
+      if (this.produtosVuex.items.length > 0) {
+        this.buscarProdutos("");
+      }
     }
-    console.log("c4");
   },
   methods: {
     goToDetail(id) {
-      this.$store.commit('atualizarFiltro', this.filtro);
+      this.$store.commit("atualizarFiltro", this.filtro);
       this.$router.push({ name: "Detail", params: { idProduto: id } });
     },
     async buscarProdutos(val) {
@@ -80,9 +77,8 @@ export default {
       try {
         await this.$services.produtos.apagarProduto(produto.id);
         this.buscarProdutos(this.filtro);
-        alert("Produto " + produto.id + " apagado com sucesso.");
       } catch (err) {
-        alert("Erro ao apagar produto " + produto.id);
+        console.log(err);
       }
     },
   },
