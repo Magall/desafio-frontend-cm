@@ -7,9 +7,9 @@ import services from "@/services";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import globalMixin from '@/mixins/global'
 import Vuelidate from 'vuelidate'
-import validacaoMixin from '@/mixins/validacao.js'
-Vue.mixin(validacaoMixin);
+Vue.mixin(globalMixin)
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);

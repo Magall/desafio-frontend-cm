@@ -1,5 +1,6 @@
-import store from "../store";
-import repository from "../repository";
+import store from "@/store";
+import repository from "@/repository";
+import extensions from "@/extensions";
 const produtos = {
   filtrarProdutos: (filtro) => {
     return store.getters.filtrarProdutos(filtro);
@@ -8,14 +9,22 @@ const produtos = {
     try {
       await repository.produtos.apagarProduto(id);
       await store.dispatch("recuperarProdutosApi");
-      alert("Produto " + id + " apagado com sucesso.");
+      extensions.notificar(true, "Produto apagado com sucesso !");
     } catch (err) {
       console.log(err);
-      alert("Erro ao apagar produto");
+      extensions.notificar(false, "Erro ao apagar produto.");
     }
   },
   recuperarProdutosApi: async () => {
-    return await store.dispatch("recuperarProdutosApi");
+    return new Promise(async (resolve, reject) => {
+      try {
+        const produtos = await store.dispatch("recuperarProdutosApi");
+        resolve(produtos);
+      } catch (err) {
+        extensions.notificar(false, "Erro ao recuperar produtos");
+        reject(err);
+      }
+    });
   },
   recuperarProduto: (id) => {
     return store.getters.recuperarProduto(id);
@@ -23,10 +32,10 @@ const produtos = {
   alterarProduto: async (id, params) => {
     try {
       await repository.produtos.alterarProduto(id, params);
+      extensions.notificar(true, "Produto Alterado com sucesso !");
       await store.dispatch("recuperarProdutosApi");
     } catch (err) {
-      alert("Erro na alteração");
-      console.log("e", err);
+      extensions.notificar(false, "Erro ao alterar produto.");
     }
   },
 };

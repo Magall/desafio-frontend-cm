@@ -50,7 +50,9 @@
 </template>
 <script>
 import { required } from "vuelidate/lib/validators";
+import validacao from '@/mixins/validacao';
 export default {
+  mixins:[validacao],
   async mounted() {
     this.opcoes.push({
       value: null,

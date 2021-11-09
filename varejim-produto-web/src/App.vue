@@ -1,13 +1,19 @@
 <template>
   <div id="app">
     <Header />
+    <Alert
+      :msg="this.$store.getters.getMsg"
+      :show="this.$store.getters.getShow"
+      :sucesso="this.$store.getters.getSucesso"
+    />
     <router-view />
   </div>
 </template>
 <script>
 import Header from "@/components/Header";
+import Alert from "@/components/Alert";
 export default {
-  components: { Header },
+  components: { Header, Alert },
   created() {
     try {
       this.$store.dispatch("recuperarProdutosApi");
