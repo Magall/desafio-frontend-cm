@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <b-container>
-    
       <b-row>
         <h2 class="my-3">Produtos</h2>
       </b-row>
@@ -46,8 +45,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
+import clone from "just-clone";
 export default {
   async mounted() {
     if (this.$store.getters.filtro) {
@@ -67,7 +65,28 @@ export default {
     async buscarProdutos(val) {
       if (this.$store.getters.produtos.items.length > 0) {
         try {
-          this.produtos = await this.$services.produtos.filtrarProdutos(val);
+          // this.produtos = await this.$services.produtos.filtrarProdutos(val);
+          let params = {
+            start: this.primeiroDaLista,
+            limit: 5,
+            ...(this.filtro.length === 3 &&
+            this.$extensions.isNumeric(this.filtro) //é número com tamanho 3 ?
+              ? { secao_id: this.filtro }
+              : {}),
+
+            ...(this.filtro.length === 4 &&
+            this.$extensions.isNumeric(this.filtro) //é número com tamanho 4 ?
+              ? { id: this.filtro }
+              : {}),
+
+            ...((this.filtro.length === 3 &&
+              this.$extensions.isNumeric(this.filtro)) ||
+            (this.filtro.length === 4 &&
+              this.$extensions.isNumeric(this.filtro)) // caso os dois acima sejam falsos assume que o filtro é a descrição
+              ? {}
+              : { descricao: this.filtro }),
+          };
+          this.produtos = await this.$services.produtos.paginarProdutos(params);
         } catch (err) {
           console.log(err);
           return {};
@@ -83,14 +102,30 @@ export default {
       }
     },
   },
+
   computed: {
-    filtroVuex() {
-      return this.$store.getters.filtro;
-    },
     produtosVuex() {
       return this.$store.getters.produtos;
     },
+
+    totalPaginas() {
+      console.log("sss", this.produtos.limit);
+      return this.produtos.items.length / parseInt(this.produtos.limit);
+    },
+
+    itensExibicao() {
+      console.log(this.produtos);
+      console.log((this.paginaAtual - 1) * this.produtos.limit);
+      console.log(this.paginaAtual * this.produtos.limit);
+      const resp = this.produtos.items.slice(
+        (this.paginaAtual - 1) * this.produtos.limit,
+        this.paginaAtual * this.produtos.limit + 1
+      );
+      console.log("resp", resp);
+      return "s";
+    },
   },
+
   watch: {
     async filtro(newValue) {
       this.buscarProdutos(newValue);
@@ -103,6 +138,7 @@ export default {
     return {
       filtro: "",
       produtos: [],
+      paginaAtual: 1,
     };
   },
 };

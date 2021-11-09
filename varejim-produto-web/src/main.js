@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import repository from "@/repository";
+import extensions from "@/extensions";
 import services from "@/services";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
@@ -15,7 +15,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 const plugin = {
   install() {
-    Vue.prototype.$repository = repository;
+    Vue.prototype.$extensions = extensions;
     Vue.prototype.$services = services;
   },
 };

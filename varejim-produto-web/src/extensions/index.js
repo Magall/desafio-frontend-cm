@@ -13,6 +13,9 @@ const extensions = {
      const naoTratadoCopy = clone(naoTratado)
       return{value:naoTratadoCopy.secao_id,text:naoTratadoCopy.descricao}
   },
+  isNumeric:(num)=>{
+    return !isNaN(parseFloat(num)) && isFinite(num)
+  },
   notificar:(sucesso, msg)=> {
     store.commit("mostrarAlerta", { msg: msg, sucesso: sucesso });
   },

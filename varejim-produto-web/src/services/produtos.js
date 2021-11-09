@@ -5,6 +5,10 @@ const produtos = {
   filtrarProdutos: (filtro) => {
     return store.getters.filtrarProdutos(filtro);
   },
+  paginarProdutos: (params)=>{
+    return repository.produtos.paginacao(params)
+  },
+  
   apagarProduto: async (id) => {
     try {
       await repository.produtos.apagarProduto(id);

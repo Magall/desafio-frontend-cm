@@ -10,7 +10,7 @@ export default new Vuex.Store({
     filtro: "",
     mostrarAlerta: false,
     msg: "",
-    sucesso:false
+    sucesso: false,
   },
   mutations: {
     atualizarProduto(state, novosProdutos) {
@@ -21,7 +21,7 @@ export default new Vuex.Store({
     },
     mostrarAlerta(state, payload) {
       state.msg = payload.msg;
-      state.sucesso=payload.sucesso;
+      state.sucesso = payload.sucesso;
       state.mostrarAlerta = true;
     },
     fecharAlerta(state) {
@@ -59,6 +59,9 @@ export default new Vuex.Store({
       };
       return resp;
     },
+    recuperarDadosPaginacao: (state) => {
+      return { limit: state.produtos.limit, total: state.produtos.total, start: state.produtos.start };
+    },
     recuperarProduto: (state) => (id) => {
       const pos = state.produtos.items.findIndex((el) => {
         return el.id == id;
@@ -78,9 +81,9 @@ export default new Vuex.Store({
     getShow: (state) => {
       return state.mostrarAlerta;
     },
-    getSucesso:(state) =>{
-      return state.sucesso
-    }
+    getSucesso: (state) => {
+      return state.sucesso;
+    },
   },
   modules: {},
 });
