@@ -14,11 +14,11 @@ import Header from "@/components/Header";
 import Alert from "@/components/Alert";
 export default {
   components: { Header, Alert },
-  created() {
-    try {
-      this.$store.dispatch("recuperarProdutosApi");
-    } catch (err) {}
-  },
+  // created() {
+  //   try {
+  //     this.$store.dispatch("recuperarProdutosApi");
+  //   } catch (err) {}
+  // },
 };
 </script>
 <style lang="scss">

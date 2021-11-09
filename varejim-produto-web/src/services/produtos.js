@@ -8,7 +8,9 @@ const produtos = {
   paginarProdutos: (params)=>{
     return repository.produtos.paginacao(params)
   },
-  
+  buscarProdutoPorId:(params)=>{
+    return repository.produtos.buscarProdutoPorId(params)
+  },
   apagarProduto: async (id) => {
     try {
       await repository.produtos.apagarProduto(id);

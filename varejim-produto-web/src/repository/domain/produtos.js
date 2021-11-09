@@ -6,11 +6,14 @@ const produtos = {
   apagarProduto: (id) => {
     return client.delete("/produtos", id);
   },
-  alterarProduto(id, params) {
+  alterarProduto: (id, params) => {
     return client.put("/produtos/" + id, params);
   },
   paginacao: (params) => {
     return client.get("/produtos", params);
+  },
+  buscarProdutoPorId: (idProduto) => {
+    return client.get("/produtos",idProduto)
   },
 };
 export default produtos;

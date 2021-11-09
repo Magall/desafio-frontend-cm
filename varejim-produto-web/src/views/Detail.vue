@@ -50,10 +50,14 @@
 </template>
 <script>
 import { required } from "vuelidate/lib/validators";
-import validacao from '@/mixins/validacao';
+import validacao from "@/mixins/validacao";
 export default {
-  mixins:[validacao],
+  mixins: [validacao],
   async mounted() {
+    this.produto = await this.$services.produtos.buscarProdutoPorId({
+      id: this.$route.params.idProduto,
+    })
+    this.produto = this.produto.items[0]
     this.opcoes.push({
       value: null,
       text: "Selecione uma categoria",
@@ -68,6 +72,7 @@ export default {
       opcoes: [],
       desc: "",
       selecionado: null,
+      produto: [],
     };
   },
   methods: {
@@ -82,13 +87,13 @@ export default {
     },
   },
   computed: {
-    produto() {
-      if (this.$store.getters.produtos.items.length > 0) {
-        return this.$services.produtos.recuperarProduto(
-          this.$route.params.idProduto
-        );
-      } else return false;
-    },
+    // produto() {
+    //   if (this.$store.getters.produtos.items.length > 0) {
+    //     return this.$services.produtos.recuperarProduto(
+    //       this.$route.params.idProduto
+    //     );
+    //   } else return false;
+    // },
   },
   validations: {
     desc: { required },

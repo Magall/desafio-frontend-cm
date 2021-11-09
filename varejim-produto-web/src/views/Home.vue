@@ -42,10 +42,10 @@
       </b-row>
       <b-button @click="paginaAnterior" variant="primary" class="my-1">
         <img
-        id="IconeSetaEsquerda"
-        src="@/assets/icones/IconeSetaEsquerda.svg"
-        @click="paginaAnterior"
-      />
+          id="IconeSetaEsquerda"
+          src="@/assets/icones/IconeSetaEsquerda.svg"
+          @click="paginaAnterior"
+        />
       </b-button>
       <span v-if="paginas">
         <span
@@ -59,10 +59,7 @@
         </span>
       </span>
       <b-button variant="primary" @click="proximaPagina"
-        ><img
-          id="IconeSetaDireita"
-          src="@/assets/icones/IconeSetaDireita.svg"
-         
+        ><img id="IconeSetaDireita" src="@/assets/icones/IconeSetaDireita.svg"
       /></b-button>
     </b-container>
   </div>
@@ -75,9 +72,7 @@ export default {
       this.filtro = this.$store.getters.filtro;
       this.buscarProdutos();
     } else {
-      if (this.produtosVuex.items.length > 0) {
-        this.buscarProdutos();
-      }
+      this.buscarProdutos();
     }
   },
   methods: {
@@ -100,32 +95,29 @@ export default {
       this.$router.push({ name: "Detail", params: { idProduto: id } });
     },
     async buscarProdutos() {
-      if (this.$store.getters.produtos.items.length > 0) {
-        try {
-          let params = {};
-          // this.produtos = await this.$services.produtos.filtrarProdutos(val);
+      try {
+        let params = {};
 
-          if (
-            this.filtro.length === 3 &&
-            this.$extensions.isNumeric(this.filtro)
-          ) {
-            params.secao_id = this.filtro;
-          } else if (
-            this.filtro.length === 4 &&
-            this.$extensions.isNumeric(this.filtro)
-          ) {
-            params.id = this.filtro;
-          } else {
-            params.descricao = this.filtro;
-          }
-
-          params.start = this.primeiroDaLista;
-          params.limit = 5;
-          this.produtos = await this.$services.produtos.paginarProdutos(params);
-        } catch (err) {
-          console.log(err);
-          return {};
+        if (
+          this.filtro.length === 3 &&
+          this.$extensions.isNumeric(this.filtro)
+        ) {
+          params.secao_id = this.filtro;
+        } else if (
+          this.filtro.length === 4 &&
+          this.$extensions.isNumeric(this.filtro)
+        ) {
+          params.id = this.filtro;
+        } else {
+          params.descricao = this.filtro;
         }
+
+        params.start = this.primeiroDaLista;
+        params.limit = 5;
+        this.produtos = await this.$services.produtos.paginarProdutos(params);
+      } catch (err) {
+        console.log(err);
+        return {};
       }
     },
     async apagarProduto(produto) {
@@ -179,7 +171,7 @@ export default {
 .pagina {
   cursor: pointer;
 }
-img{
+img {
   width: 24px;
 }
 </style>
