@@ -15,5 +15,8 @@ const produtos = {
   buscarProdutoPorId: (idProduto) => {
     return client.get("/produtos",idProduto)
   },
+  inserirProduto:(params) =>{
+    return client.post("/produtos",params)
+  }
 };
 export default produtos;

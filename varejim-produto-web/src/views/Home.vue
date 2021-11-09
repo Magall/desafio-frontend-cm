@@ -1,8 +1,14 @@
 <template>
   <div class="home">
+    <Modal  @fechei="buscarProdutos"/>
     <b-container>
-      <b-row>
-        <h2 class="my-3">Produtos</h2>
+      <b-row align-v="center">
+        <b-col offset-md="5" md="2" cols="12">
+          <h1 class="my-3">Produtos</h1>
+        </b-col>
+        <b-col md="1" cols="12">
+          <b-button variant="success" v-b-modal.modal-add>Adicionar</b-button>
+        </b-col>
       </b-row>
       <b-row>
         <b-col cols="12">
@@ -66,7 +72,9 @@
 </template>
 
 <script>
+import Modal from "@/components/ModalAdicaoProduto";
 export default {
+  components: { Modal },
   async mounted() {
     if (this.$store.getters.filtro) {
       this.filtro = this.$store.getters.filtro;

@@ -3,7 +3,7 @@
     <b-container>
       <b-row class="my-2">
         <div class="center">
-          <h1 class="mx-2" v-if="produto">{{ produto.descricao }}</h1>
+          <h1 class="mx-2">{{ produto.descricao }}</h1>
           <b-button
             class="mx-1"
             @click="apagarProduto(produto)"
@@ -49,29 +49,19 @@
   </div>
 </template>
 <script>
-import { required } from "vuelidate/lib/validators";
 import validacao from "@/mixins/validacao";
+import formProduto from "@/mixins/formProduto";
 export default {
-  mixins: [validacao],
+  mixins: [validacao, formProduto],
   async mounted() {
     this.produto = await this.$services.produtos.buscarProdutoPorId({
       id: this.$route.params.idProduto,
-    })
-    this.produto = this.produto.items[0]
-    this.opcoes.push({
-      value: null,
-      text: "Selecione uma categoria",
-      disabled: true,
     });
-    this.opcoes.push(
-      ...(await this.$services.secoes.recuperarDadosSelectSecoes())
-    );
+    this.produto = this.produto.items[0];
+    this.preencherOpcoes();
   },
   data() {
     return {
-      opcoes: [],
-      desc: "",
-      selecionado: null,
       produto: [],
     };
   },
@@ -85,19 +75,6 @@ export default {
         });
       }
     },
-  },
-  computed: {
-    // produto() {
-    //   if (this.$store.getters.produtos.items.length > 0) {
-    //     return this.$services.produtos.recuperarProduto(
-    //       this.$route.params.idProduto
-    //     );
-    //   } else return false;
-    // },
-  },
-  validations: {
-    desc: { required },
-    selecionado: { required },
   },
 };
 </script>

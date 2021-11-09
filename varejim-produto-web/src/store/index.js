@@ -30,9 +30,6 @@ export default new Vuex.Store({
    
   },
   getters: {
-    
-    
-    
 
     filtro: (state) => {
       return state.filtro;

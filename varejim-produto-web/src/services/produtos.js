@@ -5,17 +5,17 @@ const produtos = {
   filtrarProdutos: (filtro) => {
     return store.getters.filtrarProdutos(filtro);
   },
-  paginarProdutos: (params)=>{
-    return repository.produtos.paginacao(params)
+  paginarProdutos: (params) => {
+    return repository.produtos.paginacao(params);
   },
-  buscarProdutoPorId:(params)=>{
-    return repository.produtos.buscarProdutoPorId(params)
+  buscarProdutoPorId: (params) => {
+    return repository.produtos.buscarProdutoPorId(params);
   },
   apagarProduto: async (id) => {
     try {
       await repository.produtos.apagarProduto(id);
       await store.dispatch("recuperarProdutosApi");
-      extensions.notificar(true, "Produto apagado com sucesso !");
+      extensions.notificar(true, "Produto apagado com sucesso!");
     } catch (err) {
       console.log(err);
       extensions.notificar(false, "Erro ao apagar produto.");
@@ -38,10 +38,19 @@ const produtos = {
   alterarProduto: async (id, params) => {
     try {
       await repository.produtos.alterarProduto(id, params);
-      extensions.notificar(true, "Produto Alterado com sucesso !");
+      extensions.notificar(true, "Produto Alterado com sucesso ");
       await store.dispatch("recuperarProdutosApi");
     } catch (err) {
       extensions.notificar(false, "Erro ao alterar produto.");
+    }
+  },
+  inserirProduto: async (params) => {
+    try {
+      await repository.produtos.inserirProduto(params);
+      extensions.notificar(true, "Produto inserido com sucesso!");
+    } catch (err) {
+      console.log(err);
+      extensions.notificar(false, "Erro ao inserir produto.");
     }
   },
 };

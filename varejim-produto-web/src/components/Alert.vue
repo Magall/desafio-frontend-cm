@@ -28,6 +28,7 @@ export default {
   color:white;
   transform: translate(-50%, 0%);
   border:none;
+  z-index: 99999999;
   button {
     background: transparent;
     border: none;
