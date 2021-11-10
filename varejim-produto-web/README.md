@@ -31,8 +31,13 @@ Esta camada possui funções genéricas que são utilizadas em outras camadas.
 
 ## Notificador
 Para não precisar de instanciar um componente de alerta em cada tela da aplicação fiz isso no App.vue. Todas as suas props são propriedades do Vuex state, que por definição é visível a qualquer instância Vue da aplicação. Foi criado uma função notificar nas extensions para facilitar a chamada as mutations que alteram a mensagem e status do alerta. Desta forma posso notificar em qualquer camada da app um erro ou menssagem de sucesso de maneira centralizada. 
+## Dependências
+ - Vuelidate  => Para validação.
+ - VueBootstrap => Estilo, aplicação funciona em celulares e computadores.
+ - Axios => Chamadas Rest.
+ - Just Clone => Utilizado para clonar objetos ou arrays complexos evitar o problema de parâmetros by ref.
 
-## Validação
-Utilizei a biblioteca Vuelidate para fazer a validação.
+## Testes
+Não fiz por causa de tempo, estou com muito trabalho na empresa, porém devido a arquitetura e separação de camadas o código é testável. Começaria testando a camada de service e depois no componente Home a busca e paginação, acredito que conseguiria uma cobertura grande com essa abordagem.
 
 
