@@ -9,10 +9,6 @@ const extensions = {
 
     return tratado;
   },
-  transformarIdDescParaValueText:(naoTratado)=>{
-     const naoTratadoCopy = clone(naoTratado)
-      return{value:naoTratadoCopy.secao_id,text:naoTratadoCopy.descricao}
-  },
   isNumeric:(num)=>{
     return !isNaN(parseFloat(num)) && isFinite(num)
   },
